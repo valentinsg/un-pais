@@ -1,3 +1,4 @@
+// #region slider.tsx
 "use client"
 
 import * as React from "react"
@@ -26,3 +27,5 @@ const Slider = React.forwardRef<
 Slider.displayName = SliderPrimitive.Root.displayName
 
 export { Slider }
+
+// #endregion

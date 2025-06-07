@@ -1,3 +1,4 @@
+// #region particle-system.tsx
 "use client"
 
 import { useEffect } from "react"
@@ -319,3 +320,5 @@ export const createSparkParticles = (x: number, y: number, count = 5): Particle[
 
   return particles
 }
+
+// #endregion

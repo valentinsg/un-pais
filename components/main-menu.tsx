@@ -1,3 +1,4 @@
+// #region main-menu.tsx
 "use client"
 
 import { useState, useEffect } from "react"
@@ -74,3 +75,5 @@ export default function MainMenu({ onStart, onShowControls, onShowCredits }: Mai
     </div>
   )
 }
+
+// #endregion

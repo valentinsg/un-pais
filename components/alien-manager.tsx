@@ -1,3 +1,4 @@
+// #region alien-manager.tsx
 "use client"
 
 // This component would handle alien AI and behavior
@@ -7,3 +8,5 @@
 export default function AlienManager() {
   return null
 }
+
+// #endregion

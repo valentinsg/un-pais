@@ -1,3 +1,4 @@
+// #region character-selection.tsx
 "use client"
 
 import { useState, useRef, useEffect } from "react"
@@ -188,3 +189,5 @@ export default function CharacterSelection({ onBack, onSelect }: CharacterSelect
     </div>
   )
 }
+
+// #endregion
