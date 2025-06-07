@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
+import { playSound } from "@/lib/sound"
 
 interface MainMenuProps {
   onStart: () => void
@@ -42,7 +43,10 @@ export default function MainMenu({ onStart, onShowControls, onShowCredits }: Mai
         <h1 className="text-5xl font-pixel text-center text-yellow-400 mb-8 pixel-text glow-text">PRESIDENCIA 20XX</h1>
 
         <Button
-          onClick={onStart}
+          onClick={() => {
+            playSound("click")
+            onStart()
+          }}
           className={`bg-purple-700 hover:bg-purple-600 text-white font-pixel text-xl w-64 h-16 mb-6 pixel-border neon-border`}
           style={{
             boxShadow: `0 0 ${10 + glowIntensity * 20}px ${5 + glowIntensity * 10}px rgba(168, 85, 247, ${0.4 + glowIntensity * 0.6})`,
@@ -55,7 +59,10 @@ export default function MainMenu({ onStart, onShowControls, onShowCredits }: Mai
 
         <div className="flex gap-4">
           <Button
-            onClick={onShowCredits}
+            onClick={() => {
+              playSound("click")
+              onShowCredits()
+            }}
             variant="outline"
             className="font-pixel bg-black text-white border-cyan-500 hover:bg-cyan-950 pixel-border"
           >
@@ -63,7 +70,10 @@ export default function MainMenu({ onStart, onShowControls, onShowCredits }: Mai
           </Button>
 
           <Button
-            onClick={onShowControls}
+            onClick={() => {
+              playSound("click")
+              onShowControls()
+            }}
             variant="outline"
             className="font-pixel bg-black text-white border-cyan-500 hover:bg-cyan-950 pixel-border"
           >

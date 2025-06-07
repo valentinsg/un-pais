@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
+import { playSound } from "@/lib/sound"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import type { Character } from "@/app/page"
 
@@ -72,6 +73,7 @@ export default function CharacterSelection({ onBack, onSelect }: CharacterSelect
     if (isTransitioning) return
     setIsTransitioning(true)
     setSelectedIndex((prev) => Math.min(prev + 1, characters.length - 1))
+    playSound("click")
     setTimeout(() => setIsTransitioning(false), 300)
   }
 
@@ -79,6 +81,7 @@ export default function CharacterSelection({ onBack, onSelect }: CharacterSelect
     if (isTransitioning) return
     setIsTransitioning(true)
     setSelectedIndex((prev) => Math.max(prev - 1, 0))
+    playSound("click")
     setTimeout(() => setIsTransitioning(false), 300)
   }
 
@@ -96,7 +99,10 @@ export default function CharacterSelection({ onBack, onSelect }: CharacterSelect
     <div className="flex flex-col items-center w-full h-screen bg-gradient-to-b from-purple-900 to-black px-4 py-8">
       <div className="w-full max-w-4xl">
         <Button
-          onClick={onBack}
+          onClick={() => {
+            playSound("click")
+            onBack()
+          }}
           variant="outline"
           className="mb-6 font-pixel bg-black text-white border-cyan-500 hover:bg-cyan-950 pixel-border"
         >
@@ -142,7 +148,10 @@ export default function CharacterSelection({ onBack, onSelect }: CharacterSelect
                   </div>
 
                   <Button
-                    onClick={() => onSelect(character)}
+                    onClick={() => {
+                      playSound("click")
+                      onSelect(character)
+                    }}
                     className="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-pixel text-sm pixel-border"
                   >
                     ELEGIR
@@ -153,7 +162,10 @@ export default function CharacterSelection({ onBack, onSelect }: CharacterSelect
           </div>
 
           <button
-            onClick={handlePrev}
+            onClick={() => {
+              playSound("click")
+              handlePrev()
+            }}
             disabled={selectedIndex === 0 || isTransitioning}
             className={`absolute left-0 top-1/2 -translate-y-1/2 bg-black p-2 rounded-full ${
               selectedIndex === 0 ? "opacity-30 cursor-not-allowed" : "opacity-100"
@@ -163,7 +175,10 @@ export default function CharacterSelection({ onBack, onSelect }: CharacterSelect
           </button>
 
           <button
-            onClick={handleNext}
+            onClick={() => {
+              playSound("click")
+              handleNext()
+            }}
             disabled={selectedIndex === characters.length - 1 || isTransitioning}
             className={`absolute right-0 top-1/2 -translate-y-1/2 bg-black p-2 rounded-full ${
               selectedIndex === characters.length - 1 ? "opacity-30 cursor-not-allowed" : "opacity-100"
@@ -180,7 +195,10 @@ export default function CharacterSelection({ onBack, onSelect }: CharacterSelect
               className={`w-3 h-3 mx-1 rounded-full cursor-pointer ${
                 selectedIndex === index ? "bg-cyan-500" : "bg-gray-700"
               }`}
-              onClick={() => setSelectedIndex(index)}
+              onClick={() => {
+                playSound("click")
+                setSelectedIndex(index)
+              }}
             />
           ))}
         </div>

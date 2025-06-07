@@ -17,6 +17,7 @@ import ParticleSystem, {
 } from "@/components/particle-system"
 import NewsTV from "@/components/news-tv"
 import AmmoCounter from "@/components/ammo-counter"
+import { playSound } from "@/lib/sound"
 
 // ===== INTERFACES Y TIPOS =====
 // Definimos todas las estructuras de datos que usa el juego
@@ -323,11 +324,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
   }, [])
 
   // ===== SISTEMA DE SONIDO =====
-  // Simula efectos de sonido (en una implementación real usaríamos archivos de audio)
-  const playSound = useCallback((soundType: string) => {
-    console.log(`🔊 Playing sound: ${soundType}`)
-    // En una implementación real, aquí cargaríamos y reproduciríamos archivos de audio
-  }, [])
+  // Se utiliza la utilidad playSound definida en lib/sound
 
   // ===== EFECTO DE TEMBLOR DE PANTALLA =====
   // Crea un efecto visual de impacto cuando ocurren explosiones o disparos
@@ -372,7 +369,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
         return updated
       })
     },
-    [playSound],
+    [],
   )
 
   // ===== VERIFICACIÓN DE LOGROS =====
@@ -493,7 +490,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
         addParticles(createSparkParticles(position.x, position.y, 3))
       }
     },
-    [currentWeapon, canSwitchWeapon, isReloading, playSound, addParticles, position],
+    [currentWeapon, canSwitchWeapon, isReloading, addParticles, position],
   )
 
   // ===== SISTEMA DE DISPARO =====
@@ -617,7 +614,6 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
     activeEvent,
     isPaused,
     isReloading,
-    playSound,
     triggerScreenShake,
     addParticles,
   ])
@@ -708,7 +704,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
     setGameStats((prev) => ({ ...prev, explosionsCreated: prev.explosionsCreated + alienCount }))
     playSound("alien_spawn")
     triggerScreenShake(8)
-  }, [nextAlienId, playSound, addParticles, triggerScreenShake])
+  }, [nextAlienId, addParticles, triggerScreenShake])
 
   // ===== SISTEMA DE RECOLECCIÓN DE ITEMS =====
   // Verifica si el jugador está cerca de algún item para recogerlo
@@ -740,7 +736,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
         }
       }
     })
-  }, [position, droppedItems, updateStats, playSound, addParticles])
+  }, [position, droppedItems, updateStats, addParticles])
 
   // ===== LOOP PRINCIPAL DEL JUEGO =====
   // El corazón del juego que se ejecuta 60 veces por segundo
@@ -986,7 +982,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
       setGameStats((prev) => ({ ...prev, ministersSpokenTo: prev.ministersSpokenTo + 1 }))
       playSound("dialog_open")
     },
-    [isPaused, activeEvent, playSound, addParticles],
+    [isPaused, activeEvent, addParticles],
   )
 
   // ===== ACCIONES DE DIÁLOGO =====
@@ -1026,7 +1022,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
         }),
       )
     },
-    [updateStats, playSound, addParticles, npcs],
+    [updateStats, addParticles, npcs],
   )
 
   // ===== REINICIO DEL JUEGO =====
@@ -1077,7 +1073,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
     setGameStats((prev) => ({ ...prev, aliensKilled: 0, explosionsCreated: 0, dataChipsCollected: 0 }))
     setIsPaused(false)
     playSound("game_reset")
-  }, [playSound])
+  }, [])
 
   // ===== UTILIDAD DE FORMATO DE TIEMPO =====
   const formatTime = (ms: number) => {
