@@ -1,3 +1,4 @@
+// #region ammo-counter.tsx
 "use client"
 
 // ===== COMPONENTE CONTADOR DE MUNICIÓN =====
@@ -70,3 +71,5 @@ export default function AmmoCounter({ currentWeapon, weaponAmmo, isReloading, we
     </div>
   )
 }
+
+// #endregion

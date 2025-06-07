@@ -1,3 +1,4 @@
+// #region event-popup.tsx
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -147,3 +148,5 @@ export default function EventPopup({ event, timeRemaining, onChoice }: EventPopu
     </div>
   )
 }
+
+// #endregion

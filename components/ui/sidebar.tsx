@@ -1,3 +1,4 @@
+// #region sidebar.tsx
 "use client"
 
 import * as React from "react"
@@ -761,3 +762,5 @@ export {
   SidebarTrigger,
   useSidebar,
 }
+
+// #endregion

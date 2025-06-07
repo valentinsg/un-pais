@@ -1,3 +1,4 @@
+// #region achievement-popup.tsx
 "use client"
 
 import { useEffect, useState } from "react"
@@ -45,3 +46,5 @@ export default function AchievementPopup({ achievement }: AchievementPopupProps)
     </div>
   )
 }
+
+// #endregion
