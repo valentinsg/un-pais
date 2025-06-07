@@ -137,7 +137,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
   const [particles, setParticles] = useState<Particle[]>([]) // Sistema de partículas para efectos
 
   // Contadores para IDs únicos
-  const [nextProjectileId, setNextProjectileId] = useState(0)
+  const nextProjectileIdRef = useRef(0)
   const [nextAlienId, setNextAlienId] = useState(0)
   const [nextItemId, setNextItemId] = useState(0)
 
@@ -526,7 +526,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
 
         // Crea el proyectil
         const newProjectile: Projectile = {
-          id: nextProjectileId,
+          id: nextProjectileIdRef.current++,
           x: bulletX,
           y: bulletY,
           direction: position.direction,
@@ -537,7 +537,6 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
 
         // Añade la bala al juego y actualiza estadísticas
         setProjectiles((prev) => [...prev, newProjectile])
-        setNextProjectileId((prev) => prev + 1)
         setWeaponAmmo((prev) => ({ ...prev, pistol: prev.pistol - 1 }))
         setGameStats((prev) => ({ ...prev, shotsFired: prev.shotsFired + 1 }))
         playSound("pistol_shot")
@@ -586,7 +585,7 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
         }
 
         const newProjectile: Projectile = {
-          id: nextProjectileId + Math.random(), // ID único con componente aleatorio
+          id: nextProjectileIdRef.current++,
           x: bulletX + (Math.random() - 0.5) * 5, // Pequeña dispersión en X
           y: bulletY + (Math.random() - 0.5) * 5, // Pequeña dispersión en Y
           direction: position.direction,
@@ -596,7 +595,6 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
         }
 
         setProjectiles((prev) => [...prev, newProjectile])
-        setNextProjectileId((prev) => prev + 1)
         setWeaponAmmo((prev) => ({ ...prev, machinegun: prev.machinegun - 1 }))
         setGameStats((prev) => ({ ...prev, shotsFired: prev.shotsFired + 1 }))
         playSound("machinegun_shot")
@@ -610,7 +608,6 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
     currentWeapon,
     weaponAmmo,
     weaponCooldown,
-    nextProjectileId,
     position,
     activeEvent,
     isPaused,
