@@ -1,3 +1,4 @@
+// #region weapon-switcher.tsx
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -71,3 +72,5 @@ export default function WeaponSwitcher({
     </div>
   )
 }
+
+// #endregion

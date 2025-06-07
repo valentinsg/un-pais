@@ -1,3 +1,4 @@
+// #region start-screen.tsx
 "use client"
 
 import { useState } from "react"
@@ -57,3 +58,5 @@ export default function StartScreen({ onStart }: StartScreenProps) {
     </div>
   )
 }
+
+// #endregion

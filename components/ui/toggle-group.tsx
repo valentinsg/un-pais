@@ -1,3 +1,4 @@
+// #region toggle-group.tsx
 "use client"
 
 import * as React from "react"
@@ -59,3 +60,5 @@ const ToggleGroupItem = React.forwardRef<
 ToggleGroupItem.displayName = ToggleGroupPrimitive.Item.displayName
 
 export { ToggleGroup, ToggleGroupItem }
+
+// #endregion

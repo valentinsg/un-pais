@@ -1,3 +1,4 @@
+// #region layout.tsx
 import type { Metadata } from 'next'
 import './globals.css'
 
@@ -18,3 +19,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+// #endregion

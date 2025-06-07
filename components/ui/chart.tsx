@@ -1,3 +1,4 @@
+// #region chart.tsx
 "use client"
 
 import * as React from "react"
@@ -363,3 +364,5 @@ export {
   ChartLegendContent,
   ChartStyle,
 }
+
+// #endregion

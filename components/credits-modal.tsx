@@ -1,3 +1,4 @@
+// #region credits-modal.tsx
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -49,3 +50,5 @@ export default function CreditsModal({ onClose }: CreditsModalProps) {
     </div>
   )
 }
+
+// #endregion

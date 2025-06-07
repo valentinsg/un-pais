@@ -1,3 +1,4 @@
+// #region controls-modal.tsx
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -49,3 +50,5 @@ export default function ControlsModal({ onClose }: ControlsModalProps) {
     </div>
   )
 }
+
+// #endregion
