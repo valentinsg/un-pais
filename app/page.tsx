@@ -35,7 +35,7 @@ export default function Home() {
       "/characters/la-chola.png",
       "/characters/la-senora-k.png",
       "/characters/chiquito-tapon.png",
-      "/backgrounds/casa-rosada.png",
+      "/background/casa-rosada.png",
       "/backgrounds/office-floor.png",
     ];
 

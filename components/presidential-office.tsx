@@ -1153,11 +1153,14 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
             ref={containerRef}
             className="relative w-full h-full overflow-hidden"
             style={{
-              // Fondo de madera con patrón repetitivo
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='800' height='800' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='wood' patternUnits='userSpaceOnUse' width='32' height='32'%3E%3Crect width='32' height='32' fill='%23A0522D'/%3E%3Crect width='32' height='2' fill='%236B3100'/%3E%3Crect width='2' height='32' fill='%236B3100'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23wood)'/%3E%3C/svg%3E")`,
-              backgroundSize: "32px 32px",
+              // Fondo con imagen de la Casa Rosada
+              backgroundImage: 'url("/background/casa-rosada.png")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
               // Aplica el efecto de temblor de pantalla
               transform: `translate(${screenShake.x}px, ${screenShake.y}px)`,
+              // Añadimos perspectiva para dar profundidad
+              perspective: '1000px',
             }}
           >
             {/* ===== MUNDO DEL JUEGO ===== */}
@@ -1253,27 +1256,52 @@ export default function PresidentialOffice({ character, onBack }: PresidentialOf
 
               {/* ===== PERSONAJE DEL JUGADOR ===== */}
               <div
-                className="absolute w-12 h-16 z-10"
+                className="absolute z-20 origin-bottom" // Usamos origin-bottom para que la escala se aplique desde abajo
                 style={{
                   left: `${position.x}px`,
                   top: `${position.y}px`,
-                  transform: "translate(-50%, -50%)",
+                  // Ajustamos la posición vertical para que los pies estén en el suelo
+                  // y aplicamos una escala que disminuye con la posición Y para simular profundidad
+                  transform: `
+                    translate(-50%, -100%) 
+                    scale(${1.5 - (position.y / 1600)}) 
+                    translateY(${position.y * 0.2}px)
+                  `,
+                  // Sombra más pronunciada
+                  filter: 'drop-shadow(2px 4px 3px rgba(0,0,0,0.7))',
+                  // Transición suave para los movimientos
+                  transition: 'transform 0.1s ease-out, filter 0.1s ease-out',
+                  // Añadimos un z-index dinámico basado en la posición Y
+                  zIndex: Math.floor(position.y)
                 }}
               >
-                <div className="w-full h-full flex items-center justify-center pixel-border pixelated">
+                <div className="w-16 h-20 flex items-end justify-center">
                   <img
                     src={character.sprite || "/placeholder.svg"}
                     alt={character.name}
-                    className="w-full h-full object-contain pixelated"
+                    className="h-5/6 w-auto object-contain pixelated"
                     style={{
                       // Filtro visual cuando usa metralleta
-                      filter: currentWeapon === "machinegun" ? "hue-rotate(20deg) saturate(1.2)" : "none",
+                      filter: currentWeapon === "machinegun" 
+                        ? "hue-rotate(20deg) saturate(1.2)" 
+                        : "drop-shadow(2px 2px 1px rgba(0,0,0,0.5))",
+                      // Voltear el sprite según la dirección
+                      transform: `scaleX(${position.direction === 'left' ? -1 : 1})`,
+                      // Ajuste fino de posición
+                      marginBottom: '2px'
                     }}
                   />
                 </div>
 
                 {/* Indicador de arma actual */}
-                <div className="absolute -right-3 top-2 text-lg">{currentWeapon === "pistol" ? "🔫" : "🔫"}</div>
+                <div className="absolute -right-1 -top-1 text-lg bg-black/90 rounded-full p-1 border border-gray-600">
+                  {currentWeapon === "pistol" ? "🔫" : "🔫"}
+                </div>
+                
+                {/* Nombre del personaje */}
+                <div className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-[10px] px-1.5 py-0.5 rounded whitespace-nowrap border border-gray-600">
+                  {character.name}
+                </div>
               </div>
 
               {/* ===== ALIENS ENEMIGOS ===== */}
